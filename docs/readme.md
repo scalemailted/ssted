@@ -21,9 +21,9 @@ A python application that randomly generates, analyzes, & visualizes highly-para
     + eel 
 
 ### Launch
-'''bash
+```bash
 python3 launcher.py
-'''
+```
 
 
 
