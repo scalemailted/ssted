@@ -3,10 +3,10 @@
 ## Description:
 This package contains all python scripts used to perform visualizations on a Spatial-Temporal Network
 
-## Scripts List:
+## Modules List:
 - draw_measures
 
-## Scripts Summary:
+## Modules Summary:
  - **draw_measures:**
     + requires: matplotlib, numpy 
     + description: various plot visualizations for the st-network measures from the analyzer package  

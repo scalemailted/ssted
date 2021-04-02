@@ -3,12 +3,12 @@
 ## Description:
 This package contains all python scripts used to perform analysis on a Spatial Temporal Network
 
-## Scripts List:
+## Modules List:
 - analysis_nx
 - analysis_teneto
 - network_measures 
 
-## Scripts Summary:
+## Modules Summary:
 - **analysis_nx:**
     + requires: networkX
     + description: converts network from ssted to networkx & executes networkX's network measures. 

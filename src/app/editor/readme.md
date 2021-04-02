@@ -3,10 +3,10 @@
 ## Description:
 This package contains all python scripts used to perform edits on a Spatial Temporal Network
 
-## Scripts List:
+## Modules List:
 - tbd
 
-## Scripts Summary:
+## Modules Summary:
 - **tbd:**
     + requires: none
     + description: tbd 

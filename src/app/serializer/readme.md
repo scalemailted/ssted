@@ -3,12 +3,12 @@
 ## Description:
 This package contains all python scripts used to serialize a Spatial-Temporal Network
 
-## Scripts List:
+## Modules List:
 - dat
 - json
 - network_writer
 
-## Scripts Summary:
+## Modules Summary:
 - **dat:**
     + requires: networkx
     + description: reads dat filetype & deserializes into stted

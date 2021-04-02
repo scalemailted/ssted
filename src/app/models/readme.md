@@ -3,10 +3,10 @@
 ## Description:
 This package contains all python scripts used to model Spatial-Temporal Networks
 
-## Scripts List:
+## Modules List:
 - network
 
-## Scripts Summary:
+## Modules Summary:
  - **network:**
     + requires: numpy 
     + description: models ssted networks  
