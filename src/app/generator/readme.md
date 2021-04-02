@@ -3,7 +3,7 @@
 ## Description:
 This package contains all python scripts used to randomly generate a Spatial-Temporal Network
 
-## Scripts List:
+## Modules List:
 - burstiness
 - gaussian
 - generator_utils
@@ -11,7 +11,11 @@ This package contains all python scripts used to randomly generate a Spatial-Tem
 - power_law
 - uniform
 
-## Scripts Summary:
+## Packages List:
+- geometric
+
+
+## Modules Summary:
  - **burstiness:**
     + requires: numpy, matplotlib
     + description: randomly generate an event on an edge in ssted network  
@@ -36,6 +40,11 @@ This package contains all python scripts used to randomly generate a Spatial-Tem
     + requires: numpy, generator.generator_utils, models.network
     + description: randomly generate nodal degrees exhibiting a uniform distrubtion   
     + suggestions: group into package with other nodal degree ditributions: powerlaw, gaussian
+
+## Packages Summary:
+- **geometric:**
+    + description: randomly generates spatial temporal graphs based on spatial parameters   
+    + suggestions: Refactor this into a smaller module
 
 
 
