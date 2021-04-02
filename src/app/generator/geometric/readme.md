@@ -1,7 +1,8 @@
-# *package:* Generator
+# *package:* geometric
 
 ## Description:
-This package contains all python scripts used to randomly generate a Geometric Spatial-Temporal Network
+This package contains all python scripts used to randomly generate a Geometric Spatial-Temporal Network.
+This was formerly a standalone application.
 
 ## Packages List:
 - sst
