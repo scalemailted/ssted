@@ -1,0 +1,64 @@
+#Goal:
+Implement spatial networks into generator
+
+-------------------------------------------------------------
+#[SUCCESS]  Goal 1: Execute geometric generator (from scala) 
+
+REPL Testing:
+> from app.generator.geometric.sst import sstLauncher
+> sstLauncher.buildNodeMovementDataset(r=20.0, nodes=50, duration=10)
+
+----------------------------------------------------------
+#[SUCCESS]  Goal 2: Convert DAT files into JSON format
+
+REPL Testing:
+>  from app.serializer import dat
+>  g = dat.loadAllGraphs('out_node-00-00')
+>  from app.serializer import json
+>  json.writeAllJSONs('out_node-00-00')
+
+-----------------------------------------------------------
+#[PROGRESS] Goal 3: Add Geometric graph into app memory
+
+Plan: convert array of networkx graphs into a tnet
+
+REPL Testing:
+>  import shutil
+>  shutil.rmtree('out_node-00-00', ignore_errors=True)
+
+>  from app.generator.geometric.sst import sstLauncher
+>  sstLauncher.buildNodeMovementDataset(r=20.0, nodes=50, duration=10)
+
+>  from app.serializer import dat
+>  g = dat.loadAllGraphs('out_node-00-00')
+
+>  from app.models.network import *
+>  tnet = TemporalNetwork()
+>  getGeometricNodes(tnet, g)
+>  getGeometricEdges(tnet, g)
+
+def getGeometricNodes(tnet, g):
+    t = 0
+    for net in g:
+        for n in net.nodes:
+            x,y = net.nodes[n]['pos']
+            pos = Position(x,y)
+            tnet.add_tnode(n,pos,t)
+        t+=1
+
+def getGeometricEdges(tnet, g):
+    t = 0;
+    for net in g:
+        for e in net.edges:
+            src, dst = e
+            te = TemporalEdge(src,dst,t)
+            tnet.add_edge_without_nodes(te)
+            print(te.id)
+        t+=1
+
+
+-----------------------------------------------------------
+#[TODO]     Goal 4: Wire inputs from browser
+
+
+

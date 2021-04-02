@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stochastic Spatial Temporal Network Toolset</title>
+
+    <!-- Include eel.js - note this file doesn't exist in the 'web' directory -->
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="stylesheet" href="../styles/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/font.css">
+    <script src='../scripts/components/Navbar.js'></script>
+    <style>
+        h1{
+            font-family: 'Fredericka the Great';
+        }
+    </style>
+</head>
+<body>
+    <div id='navbar'></div>
+    <div class='container py-4'>
+        <h1 class='text-center'>Analysis Tools</h1>
+        <hr>
+    </div>
+    <!-- Controls to Evaluate a Network-->
+    <div class='container text-center' id='wrapper'>
+        <label for='location-selector' style='font-family: Arial; font-size: 12px;'>source: </label>
+        <select id='location-selector'>
+            <option default value='local'>Local</option>
+        </select>
+        <span id='source-input'></span>
+        <button class='btn btn-sm btn-success' id='analyze-button'>Analyze</button> 
+    </div>
+
+    <div class='container text-center' id='analysis-visuals'>
+    </div>
+
+    <!-- #TODO: Implement these measures-->
+    <!--
+    <div class='container'>
+        <ul>
+            <li>Shortest Path</li>
+            <li>temporal degree centrality</li>
+            <li>temporal degree centrality overall</li>
+            <li>topological overlap (overall)</li>
+            <li>topological overlap</li>
+            <li>topological overlap average</li>
+            <li>temporal correlation coefficient</li>
+            <li>intercontact times</li>
+            <li>bursty coefficient</li>
+            <li>local variation</li>
+        </ul>
+    </div>
+    -->
+    
+
+    <script>
+        new Navbar('navbar','Analyze');
+    </script>
+    <!--
+    <script>
+        class FolderLoader{
+            constructor(containerID ='source-input', ext='.json'){
+                document.getElementById(containerID).innerHTML = "" +
+                `<input id="folder-uploader" type="file" name='file' webkitdirectory directory multiple>`
+                this.folderUpload = document.getElementById('folder-uploader');
+                this.folderUpload.addEventListener('change', () => this.getFiles(ext) )
+            }
+            async getFiles( ...extensions){
+                const data = [];
+                let files = [ ...this.folderUpload.files].filter( f=> extensions.some( ext => f.name.includes(ext)) )
+                for (let file of files){
+                    const jsonString = await file.text();
+                    const json = JSON.parse(jsonString)
+                    data.push(json);
+                }
+            this.load(data)
+            }
+            load(data){
+                //separate out this function
+                let networks = data.map( item => new Graph(item.nodes, item.links))
+            }
+        }
+
+        class SourceSelector{
+            constructor(id='location-selector'){
+                this.networks = [];
+                this.selector = document.getElementById(id);
+                this.selector.addEventListener('change', () => this.update() )
+                this.update();
+            }
+            async update(){
+                switch(this.selector.value){
+                    case 'local': new FolderLoader(); break;
+                    default: 
+                        const tnet = await eel.get_tnet(this.selector.value)()
+                        new AppLoader(tnet); break;
+                        //new AppLoader(this.selector.value); break;
+                }
+            }
+        }
+
+
+        const selector = document.getElementById('location-selector')
+        //selector.addEventListener( "change", updateSelector)
+        async function updateSelector(){
+            const selector = document.getElementById('location-selector')
+            selector.innerHTML = ""
+            selector.innerHTML += `<option default value='local'>Local</option>`
+            count = await eel.get_count()()
+            console.log("tnet_count",count)
+            for (let i=1; i<=count; i++){
+                const label = await eel.get_description(i)();
+                selector.innerHTML += `<option value='${i}'>${i}:${label}</option>`
+            }
+        }
+        updateSelector()
+
+        const submit_btn = document.getElementById('analyze-button')
+        submit_btn.addEventListener('click',analyze)
+
+        function analyze(){
+            const tnet = document.getElementById('location-selector').value
+            console.log("analyze",tnet)
+        }
+    </script>
+    -->
+    <script src="../scripts/libs/jquery-3.5.1.slim.min.js" ></script>
+    <script src="../scripts/libs/popper.min.js"></script>
+    <script src="../scripts/libs/bootstrap.min.js"></script>
+    <script src="../scripts/app/analyze/controllers.js"></script>
+</body>
+</html>

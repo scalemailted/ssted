@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stochastic Spatial Temporal Network Toolset</title>
+
+    <!-- Include eel.js - note this file doesn't exist in the 'web' directory -->
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="stylesheet" href="../styles/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/font.css">
+    <script src='../scripts/components/Navbar.js'></script>
+    <style>
+        h1{
+            font-family: 'Fredericka the Great';
+        }
+    </style>
+</head>
+<body>
+    <div id='navbar'></div>
+    <div class='container py-4'>
+        <h1 class='text-center'>Documentation & API</h1>
+        <hr>
+    </div>
+
+    <div class="container">
+        <h3>Table of Contents</h3>
+        <hr>
+        <ul>
+            <li>Approach</li>
+            <li>Measurements</li>
+            <ul>
+                <li>Static Measures</li>
+                <li>Dynamic Measures (i.e. Temporal)</li>
+                <li>Similarity Measures</li>
+            </ul>
+        </ul>
+        <hr>
+    </div>
+
+    <div class='container'>
+        <h3>Temproal Network Measurements</h3>
+        <hr>
+        <h4>Shortest Geodestic Path</h4>
+        <p>
+            The minimum number of edges (or sum of edge weights) that it takes for a node to communicate to another node.  
+        </p>
+
+        <h4>Shortest Temporal Distance or "Waiting time"</h4>
+        <p>
+            In temporal networks, quantify the time taken for one node to communicate with another node. 
+            Temporal paths can be measured by calculating either how many edges are traveled or how many time steps are taken. 
+        </p>
+
+        <h4>Intercontact Time</h4>
+        <p>
+            The time taken between two nodes with a direct connection.
+            The intercontact time between two nodes is defined as the temporal difference distinguishing
+            two consecutive nonzero edges between those nodes. This definition differs from the shortest
+            temporal path in so far as it only considers direct connections between two nodes
+        </p>
+
+        <h4> Nodal Measure:  Temporal Centrality</h4>
+        <p>
+            A node’s influence in a temporal network can be calculated in a way akin to degree centrality
+            in the static case, where the sum of the edges for a node is calculated. The difference from its
+            static counterpart is that we also sum the number of edges across time.
+        </p>
+
+        <h4>Nodal Measure:  Temporal Closeness Centrality</h4>
+        <p>
+            A centrality measure that does consider the temporal order is temporal closeness centrality. 
+            This is an extension of the static closeness centrality, which is the inverse sum of the shortest paths
+        </p>
+
+        <h4>Edge Measure: Bursts</h4>
+        <p>
+            In temporal network theory, a hallmark of a bursty edge is the
+            presence of multiple edges with short intercontact times, followed by longer and varying intercontact times. 
+            In statistical terms, such a process is characterized by a heavy-tailed distribution
+            of intercontact time probabilities.
+        </p>
+
+        <h4>Global Measure: Fluctuability</h4>
+        <p>
+            Although centrality measures provide information about the degree of temporal connectivity,
+            and bursts describe the distribution of the temporal patterns of connectivity at a nodal level,
+            one might also want to retrieve information about the global state of a temporal network. To
+            this end, fluctuability aims to quantify the temporal variability of connectivity.
+        </p>
+
+        <h4>Global Measure: Volatility</h4>
+        <p>
+            One possible global measure of temporal order is how much, on average, the connectivity
+            between consecutive t-graphlets changes. This indicates how volatile the temporal network is
+            over time. 
+        </p>
+
+        <h4>Global Measure: Reachability Latency</h4>
+        <p>
+            Measures of reachability focus on estimating the time taken to “reach” the nodes in a temporal
+            network. Both the reachability ratio and reachability time are used. The
+            reachability ratio is the percentage of edges that have a temporal path connecting them. The
+            reachability time is the average length of all temporal paths. However, when applying reachability to the brain, the two aforementioned measures are not ideal, given the noncontroversial
+            assumption that any region in the brain, given sufficient time, can reach all other regions.
+            With this assumption in mind, we define a measure of reachability, reachability latency,
+            that quantifies the average time it takes for a temporal network to reach an a-priori-defined
+            reachability ratio. 
+        </p>
+        
+        <h4>Global Measure: Temporal Efficiency</h4>
+        <p>
+            A similar concept is the idea of temporal efficiency. In the static case, efficiency is computed as
+            the inverse of the average shortest path for all nodes. Temporal efficiency is first calculated at
+            each time point as the inverse of the average shortest path length for all nodes. Subsequently,
+            the inverse average shortest path lengths are averaged across time points to obtain an estimate
+            of global temporal efficiency.
+        </p>
+
+        <h4>Statistical Considerations of Temporal Network Measures</h4>
+        <p>
+            When implementing temporal graph measures, it is important to perform adequate statistical
+            tests to infer differences between the subject groups, task conditions, or chance levels. For
+            group comparisons, nonparametric permutation methods are advantageous where the group
+            assignment of the calculated measure can be shuffled between the groups and a null distribution can be created. Alternatively, to justify that a measure is significantly present above
+            chance levels, the construction of null graphs is required. There are multiple ways to create
+            temporal null graphs, and they each have their own benefits and drawbacks. One method
+            is to permute the temporal order of entire time series, but this will destroy any autocorrelation present in the data. Another alternative is to permute the phase of the time series prior to
+            thresholding the t-graphlets. A third option would be to permute blocks of time series data, but
+            this may not be appropriate for all network measures (e.g., volatility). A fourth option would
+            be to use vector autoregressive null models (Chang & Glover, 2010; Zalesky et al., 2014). We
+            refer the reader to Holme & Saramäki (2012) for a full account of approaches to performing
+            statistical tests on measures derived from temporal network theory.
+        </p>
+    </div>
+    
+
+    <script>
+        new Navbar('navbar','Documentation');
+    </script>
+    <script src="../scripts/libs/jquery-3.5.1.slim.min.js" ></script>
+    <script src="../scripts/libs/popper.min.js"></script>
+    <script src="../scripts/libs/bootstrap.min.js"></script>
+</body>
+</html>

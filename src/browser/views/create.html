@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stochastic Spatial Temporal Network Toolset</title>
+
+    <!-- Include eel.js - note this file doesn't exist in the 'web' directory -->
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="stylesheet" href="../styles/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/font.css">
+    <script src='../scripts/components/Navbar.js'></script>
+    <script src='../scripts/components/InputItem.js'></script>
+    <style>
+        h1{
+            font-family: 'Fredericka the Great';
+        }
+    </style>
+</head>
+<body>
+    <div id='navbar'></div>
+    <div class='container pt-4'>
+        <h1 class='text-center'>Generate Dataset</h1>
+        <hr>
+    </div>
+<!--
+    <div class='container'>
+        <h3>Inputs:</h3>
+        <hr>
+        <div class="row"> 
+            <div class="col">
+                <div class="form-group row">
+                    <label for="field1" class="col-md-6 col-form-label">Temporal Behavior</label>
+                    <div class="col-md-6">
+                        <select class="form-control" id="temporal-behavior">
+                            <option>Node Movement</option>
+                            <option>Edge Tolerance</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label for="field1" class="col-md-6 col-form-label">Degree Distribution</label>
+                    <div class="col-md-6">
+                        <select class="form-control" id="degree-distribution">
+                            <option>Geometric</option>
+                            <option>Uniform</option>
+                            <option>Gaussian</option>
+                            <option>Power Law</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="field1" class="col-md-6 col-form-label">Node Count</label>
+                    <div class="col-md-6">
+                        <input id="node-count" class="form-control" value='50'>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="field1" class="col-md-6 col-form-label">Temporal Duration</label>
+                    <div class="col-md-6">
+                        <input id="temporal-duration" class="form-control" value='30'>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="field1" class="col-md-6 col-form-label">Realizations Count</label>
+                    <div class="col-md-6">
+                        <input id="mutation-rate" class="form-control" value='1'>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div id='input-div'>
+                    <div class="form-group row">
+                        <label for="field1" class="col-md-6 col-form-label">Node Neighbor Radius</label>
+                        <div class="col-md-6">
+                            <input id="node-neighbor-radius" class="form-control" value='20'>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="field1" class="col-md-6 col-form-label">Mean</label>
+                        <div class="col-md-6">
+                            <input id="mean" class="form-control" value='0'>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="field1" class="col-md-6 col-form-label">Standard Deviation</label>
+                        <div class="col-md-6">
+                            <input id="standard-deviation" class="form-control" value='1'>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="field1" class="col-md-6 col-form-label">Edge Weights</label>
+                    <div class="col-md-6">
+                        <input id="edge-weights" class="form-control" value='1'>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="field1" class="col-md-6 col-form-label">Edge Connectivity</label>
+                    <div class="col-md-6">
+                        <select class="form-control" id="edge-connectivity">
+                            <option>Non-directional</option>
+                            <option>Directional</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="field1" class="col-md-6 col-form-label">Spatiality Type</label>
+                    <div class="col-md-6">
+                        <select class="form-control" id="spatiality-type">
+                            <option>Euclidean space</option>
+                            <option>Topological space</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+-->
+
+    <div class="container">
+        <h3 class='display'>Controls:</h3>
+        <hr>
+        <div class='row'>
+            <div class='col'>
+                <button type="button" class="btn btn-success btn-block" id='create'>Generate</button>
+            </div>
+            <div class='col'>
+                <button id='network-counter' type="button" class="btn btn-outline-secondary btn-block">Realizations: <span id='counter'>0</span></button>
+            </div>
+            <div class='col'>
+                <div class="input-group border border-dark">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="status-bar">Status: </span>
+                    </div>
+                    <input type="text" class="form-control bg-dark text-light" id="status" aria-describedby="status" disabled value='None'>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!--[ #Refactored START ]-->
+
+<div class='container'>
+    <hr>
+    <h3>Inputs:</h3>
+    <hr>
+
+    <div>
+        <a  data-toggle="collapse" data-target="#network-options" aria-expanded="false" aria-controls="network-options">
+        <h5>Network</h5>
+        </a>
+        <div class="collapse" id="network-options"></div>
+        <hr>
+    </div>
+
+    <div>
+        <a  data-toggle="collapse" data-target="#nodes-options" aria-expanded="false" aria-controls="nodes-options">
+        <h5>Nodes</h5>
+        </a>
+        <div class="collapse" id="nodes-options"></div>
+        <hr>
+    </div>
+
+    <div>
+        <a  data-toggle="collapse" data-target="#edges-options" aria-expanded="false" aria-controls="edges-options">
+        <h5>Edges</h5>
+        </a>
+        <div class="collapse" id="edges-options"></div>
+        <hr>
+    </div>
+
+
+    <div>
+        <a  data-toggle="collapse" data-target="#events-options" aria-expanded="false" aria-controls="events-options">
+        <h5>Events</h5>
+        </a>
+        <div class="collapse" id="events-options"></div>
+        <hr>
+    </div>
+
+</div>
+
+
+<!--[ #Refactored END ]-->
+    
+
+    <script>
+        new Navbar('navbar','Create');
+        //Network Settings
+        new SelectorItem('Network Density','network-density','network-options','random','sparse','dense');
+        new SelectorItem('Degree Distribution','degree-distribution','network-options','powerlaw','gaussian','uniform','geometric');
+        //Node Settings
+        new InputItem('Node Count','nodes-count','50','nodes-options');
+        new SelectorItem('Node Position','nodes-position','nodes-options','random','clustered');
+        new SelectorItem('Node Velocity','nodes-velocity','nodes-options','fixed','dynamic');
+        //Edge Settings
+        new SelectorItem('Edge Directionality','edge-direction','edges-options','unidirectional','directional');
+        new InputItem('Edge Weights','edge-weights','1','edges-options');
+        //Event  Settings
+        new InputItem('Frames Count','frames-count','10','events-options');
+        new SelectorItem('Events Triggers','events-trigger','events-options','random','node proximity (geometric)','edge tolerance (geometric)');
+        new SelectorItem('Events Distribution','events-occurence','events-options','gaussian','uniform','periodic','bursty');
+        new InputItem('Events Duration','events-duration','1','events-options');
+        new InputItem('Minimum Broadcast Rate','events-min-rate','0.25','events-options');
+        new InputItem('Activity Rate (Random only)','events-activity-rate','0.50','events-options');
+
+
+
+
+
+    </script>
+    <script src="../scripts/libs/jquery-3.5.1.slim.min.js" ></script>
+    <script src="../scripts/libs/popper.min.js"></script>
+    <script src="../scripts/libs/bootstrap.min.js"></script>
+    <script src="../scripts/app/create/controllers.js"></script>
+</body>
+</html>
+
+
+
+<!--
+import os
+import urllib.request
+import ssl                                            
+import time
+from datetime import datetime
+
+ssl._create_default_https_context = ssl._create_unverified_context
+
+def monintor_webpage():  
+    try:                             
+        contents = urllib.request.urlopen("https://www.sideprojectbrewing.com/shop/dbmitwpackage").read()
+        while '<span class="sqs-money-native">0.00</span>' in contents.decode("utf-8"):  
+            contents = urllib.request.urlopen("https://www.sideprojectbrewing.com/shop/dbmitwpackage").read()
+            time.sleep(30)
+            now = datetime.now()
+            print("refresh: ",now)
+        while True:
+            os.system('say "the beer released"')
+            time.sleep(1)
+    except:
+        while True:
+                os.system('say "Error"')
+                time.sleep(1)
+
+
+ssl._create_default_https_context = ssl._create_unverified_context
+monintor_webpage()
+-->
+
+<!--
+import os
+import urllib.request
+import ssl                                            
+import time
+from datetime import datetime
+
+ssl._create_default_https_context = ssl._create_unverified_context
+
+def monintor_webpage(url, html):  
+    try:                             
+        contents = urllib.request.urlopen(url).read()
+        while html in contents.decode("utf-8"):  
+            contents = urllib.request.urlopen(url).read()
+            time.sleep(30)
+            now = datetime.now()
+            print("refresh: ",now)
+        while True:
+            os.system('say "the beer released"')
+            time.sleep(1)
+    except:
+        while True:
+                os.system('say "Error"')
+                time.sleep(1)
+
+
+ssl._create_default_https_context = ssl._create_unverified_context
+url = "https://www.sideprojectbrewing.com/shop/dbmitwpackage"
+html = '<span class="sqs-money-native">0.00</span>'
+monintor_webpage(url, html)
+-->

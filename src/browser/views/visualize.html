@@ -1,0 +1,163 @@
+<!--Source:  http://bl.ocks.org/dianaow/583e601c752927f17c371670f7d36395 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stochastic Spatial Temporal Network Toolset</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <!-- Include eel.js - note this file doesn't exist in the 'web' directory -->
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="stylesheet" href="../styles/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/libs/font-awesome.min.css">
+    <link rel="stylesheet" href="../styles/font.css">
+    <script src="../scripts/libs/d3.v5.min.js"></script>
+    <script src='../scripts/components/Navbar.js'></script>
+    <style>
+        h1{
+            font-family: 'Fredericka the Great';
+        }
+    </style>
+    <style>
+
+        #wrapper {
+          background-image:
+            radial-gradient(
+              circle closest-side,
+              white,
+              lightgray
+            );
+          text-align: center;
+        }
+        .btn {
+          color: mediumblue;
+          background: transparent; 
+          border: 2px solid mediumblue; 
+          border-radius: 6px; 
+          padding: 6px 8px;
+          text-align: center;
+          display: inline-block;
+          font-size: 0.8em;
+          margin: 4px 2px;
+          -webkit-transition-duration: 0.4s; /* Safari */
+          transition-duration: 0.4s;
+          cursor: pointer;
+          text-decoration: none;
+          text-transform: uppercase;
+        }
+        .btn:hover {
+            background-color: mediumblue;
+            color: white;
+        }
+        .btn:focus {
+            background-color: mediumblue;
+            color: white;
+        }
+        .play{
+            border-color: green !important;
+            color: green !important;
+        }
+        .play:focus {
+            background-color:green !important;
+            color: white !important;
+        }
+        .play:hover{
+            color: white !important;
+            background-color: green !important;
+        }
+        .pause{
+            border-color: red !important;
+            color: red !important;
+        }
+        .pause:hover{
+            color: white !important;
+            background-color: red !important;
+        }
+        .pause:focus {
+            background-color: red !important;
+            color: white !important;
+        }
+        #rangeText{
+            text-align: right;
+            border: lightgray;
+        }
+    
+        /*Chrome*/
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+            input[type='range'] {
+            overflow: hidden;
+            width: 400px;
+            -webkit-appearance: none;
+            background-color: white;
+            }
+            
+            input[type='range']::-webkit-slider-runnable-track {
+            height: 10px;
+            -webkit-appearance: none;
+            color: red;
+            margin-top: -1px;
+            }
+            
+            input[type='range']::-webkit-slider-thumb {
+            width: 10px;
+            -webkit-appearance: none;
+            height: 10px;
+            cursor: ew-resize;
+            background: rgb(175,0,0);
+            box-shadow: -400px 0 0 400px red;
+            }
+    
+        }
+        /** FF*/
+        input[type="range"]::-moz-range-progress {
+        background-color: red; 
+        }
+        input[type="range"]::-moz-range-track {  
+        background-color: white;
+        }
+        /* IE*/
+        input[type="range"]::-ms-fill-lower {
+        background-color: red; 
+        }
+        input[type="range"]::-ms-fill-upper {  
+        background-color: white;
+    }
+    
+    input[type="url"] {
+            border: 0;
+            outline: 0;
+            background: transparent;
+            border-bottom: 1px solid black;
+    }
+    
+    </style>
+</head>
+<body>
+    <div id='navbar'></div>
+    <div class='container py-4'>
+        <h1 class='text-center'>Network Visualizations</h1>
+        <hr>
+    </div>
+
+    <div id='wrapper'>
+        <span style='float:left; padding: 12px;'>
+            <label for='location-selector' style='font-family: Arial; font-size: 12px;'>source: </label>
+            <select id='location-selector'>
+                <option default value='local'>Local</option>
+                <option value='github'>Github</option>
+            </select>
+            <span id='source-input'></span> 
+        </span>  
+        <div id="chart"></div>
+        <span id="slider" '></span>
+    </div>
+    
+
+    <script>
+        new Navbar('navbar','Visualize');
+    </script>
+    <script src="../scripts/app/visualize/Graph.js"></script>
+    <script src="../scripts/libs/jquery-3.5.1.slim.min.js" ></script>
+    <script src="../scripts/libs/popper.min.js"></script>
+    <script src="../scripts/libs/bootstrap.min.js"></script>
+</body>
+</html>
