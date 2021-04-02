@@ -1,4 +1,4 @@
-# *Package:* App
+# *package:* App
 
 ## Description:
 This package contains all python scripts used to randomly generate a Spatial-Temporal Network

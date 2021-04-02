@@ -1,4 +1,4 @@
-# *Package:* Editor
+# *package:* Editor
 
 ## Description:
 This package contains all python scripts used to perform edits on a Spatial Temporal Network
