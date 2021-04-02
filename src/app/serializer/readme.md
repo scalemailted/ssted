@@ -1,4 +1,4 @@
-# Serializer:
+# *Package:* Serializer
 
 ## Description:
 This package contains all python scripts used to serialize a Spatial-Temporal Network

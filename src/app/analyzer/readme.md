@@ -1,4 +1,4 @@
-# Analyzer:
+# *Package:* Analyzer
 
 ## Description:
 This package contains all python scripts used to perform analysis on a Spatial Temporal Network

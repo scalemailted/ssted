@@ -1,4 +1,4 @@
-# Visualizer:
+# *Package:* Visualizer
 
 ## Description:
 This package contains all python scripts used to perform visualizations on a Spatial-Temporal Network

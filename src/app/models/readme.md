@@ -1,4 +1,4 @@
-# Models:
+# *Package:* Models
 
 ## Description:
 This package contains all python scripts used to model Spatial-Temporal Networks
