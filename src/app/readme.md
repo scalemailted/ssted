@@ -1,59 +1,50 @@
 # *package:* App
 
 ## Description:
-This package contains all python scripts used to randomly generate a Spatial-Temporal Network
+This package contains all python packages that implement the ssted toolset
 
 ## Packages List:
-- geometric
+- analyzer
+- editor
+- generator
+- models
+- serializer
+- visualizer
 
 ## Modules List:
-- burstiness
-- gaussian
-- generator_utils
-- geometric (directory)
-- power_law
-- uniform
+- controllers
 
 
 ## Packages Summary:
-- **geometric:**
-    + description: randomly generates spatial temporal graphs based on spatial parameters   
-    + suggestions: Refactor this into a smaller module
+- **analyzer:**
+    + description: Analysis tools for ssted networks
+    + suggestions: Add spatial analysis. Conceive of new measures. 
+
+- **editor:**
+    + description: Editing tools to customize ssted networks 
+    + suggestions: Implement a mvp build
+
+- **generator:**
+    + description: Generators tools to randomly create highly-parameterized ssted networks     
+    + suggestions: Refactor spatial parameters
+
+- **model:**
+    + description: Models ssted network  
+    + suggestions: Decompose module into classes for improved extensibility
+    
+- **serializer:**
+    + description: Serialization tools for ssted networks  
+    + suggestions: Add more import/export options for common formats, export data options
+
+- **visualizer:**
+    + description: Viewing tools for ssted networks 
+    + suggestions: more parameters for viewer. more viewing options
+    
 
 ## Modules Summary:
- - **burstiness:**
-    + requires: numpy, matplotlib
-    + description: randomly generate an event on an edge in ssted network  
-    + suggestions: group into package with other network ditributions: edge generators, event generators, node generators. This script needs refactoring! __Check what depeneds on this package__
-
- - **gaussian:**
-    + requires: numpy, generator.generator_utils, models.network 
-    + description: randomly generate nodal degrees exhibiting a gaussian distrubtion   
-    + suggestions: group into package with other nodal degree ditributions: powerlaw, uniform, 
-
-- **generator_utils:**
-    + requires: models.network, networkx
-    + description: utility methods to generate & evolve a ssted network given a list of nodal degrees  
-    + suggestions: Remove networkx dependency, compute own positional data instead!
-
-- **power_law:**
-    + requires: numpy, generator.generator_utils, models.network
-    + description: randomly generate nodal degrees exhibiting a powerlaw distrubtion   
-    + suggestions: group into package with other nodal degree ditributions: uniform, gaussian
-
-- **uniform:**
-    + requires: numpy, generator.generator_utils, models.network
-    + description: randomly generate nodal degrees exhibiting a uniform distrubtion   
-    + suggestions: group into package with other nodal degree ditributions: powerlaw, gaussian
-
-
-
-
-
-
-
-
-
-
+ - **controllers:**
+    + requires: eel
+    + description: Endpoints for frontend browser requests via eel api
+    + suggestions: decompose functions for readability, maintainability, & extensibility. 
 
 
